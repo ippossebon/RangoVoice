@@ -8,8 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         list_view.setAdapter(adapter);
 
         // ListView Item Click Listener]
-        /*
-        listView.setOnItemClickListener(new OnItemClickListener() {
+
+        list_view.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 int itemPosition     = position;
 
                 // ListView Clicked item value
-                String  itemValue    = (String) listView.getItemAtPosition(position);
+                String  itemValue    = (String) list_view.getItemAtPosition(position);
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
@@ -67,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 /* No nosso caso, devemos lançar uma segunda activity a partir desta - exibir a receita. Para isso, usamos um
                 * intent. Olhar site "como criar Activity". */
 
-        //}
+            }
 
-        //});
+        });
 
     }
 }
