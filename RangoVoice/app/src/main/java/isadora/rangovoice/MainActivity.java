@@ -8,45 +8,68 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ListView list_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_main); // Define o layout da activity - de acordo com o nome do arquivo xml
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        // Get ListView object from xml
+        list_view = (ListView) findViewById(R.id.list); // list é o nome do arquivo xml que define <ListView>
+
+        // Defined Array values to show in ListView
+        String[] values = new String[] { "Bolo de chocolate", "Feijão tropeiro", "Bolinho de arroz", "Mousse de maracujá",
+                "Massa à carbonara",
+                "Filé ao molho madeira",
+                "Pizza caseira",
+                "Brigadeiro"
+        };
+
+        // Define a new Adapter
+        // First parameter - Context
+        // Second parameter - Layout for the row
+        // Third parameter - ID of the TextView to which the data is written
+        // Forth - the Array of data
+
+        // Adaptors fornecem o conteúdo a interface.
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.activity_list_item, android.R.id.text1, values);
+
+
+        // Assign adapter to ListView
+        list_view.setAdapter(adapter);
+
+        // ListView Item Click Listener]
+        /*
+        listView.setOnItemClickListener(new OnItemClickListener() {
+
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+                // ListView Clicked item index
+                int itemPosition     = position;
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+                // ListView Clicked item value
+                String  itemValue    = (String) listView.getItemAtPosition(position);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                        .show();
 
-        return super.onOptionsItemSelected(item);
+                /* No nosso caso, devemos lançar uma segunda activity a partir desta - exibir a receita. Para isso, usamos um
+                * intent. Olhar site "como criar Activity". */
+
+        //}
+
+        //});
+
     }
 }
