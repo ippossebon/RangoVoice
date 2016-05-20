@@ -5,18 +5,24 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private ListView list_view;
+    public static ArrayList<Receita> receitas;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -32,40 +38,31 @@ public class MainActivity extends AppCompatActivity {
         // Get ListView object from xml
         list_view = (ListView) findViewById(R.id.list); // list é o nome do arquivo xml que define <ListView>
 
-        // Defined Array values to show in ListView
-        String[] values = new String[]{"Bolo de chocolate", "Feijão tropeiro", "Bolinho de arroz", "Mousse de maracujá",
-                "Massa à carbonara",
-                "Filé ao molho madeira",
-                "Pizza caseira",
-                "Brigadeiro"
-        };
+        receitas = new ArrayList<Receita>();
+        criaReceitas();
+        String[] nomes_receitas = criaArrayNomeReceitas();
 
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-        // Adaptors fornecem o conteúdo a interface.
+        /* Adaptors fornecem o conteúdo a interface.
+         Primeiro parâmetro: contexto, Segundo: layout da linha, terceiro: ID do textview em que será escrito, quarto: array de conteudo*/
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.activity_list_item, android.R.id.text1, values);
+                android.R.layout.activity_list_item, android.R.id.text1, nomes_receitas);
 
 
         // Assign adapter to ListView
         list_view.setAdapter(adapter);
 
         // ListView Item Click Listener]
-
         list_view.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // ListView Clicked item index
                 int itemPosition     = position;
+
                 //Cria nova activity
-                Intent secondActivity = new Intent(MainActivity.this, SecondActivity.class);
+                Intent secondActivity = new Intent(MainActivity.this, ExibirReceitaActivity.class);
+
                 //Para passar por parâmetro o item selecionado:
                 Bundle b = new Bundle();
                 b.putInt("id", itemPosition); //Your id
@@ -119,5 +116,120 @@ public class MainActivity extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    private void criaReceitas(){
+
+        // Bolo de chocolate
+        ArrayList<String> ingredientes1 = new ArrayList<String>();
+        ingredientes1.add("4 ovos");
+        ingredientes1.add("150 ml de leite integral");
+        ingredientes1.add("120 ml de óleo");
+        ingredientes1.add("1 xícara e 1/8 de açúcar mascavo");
+        ingredientes1.add("1/2 colher de sopa de extrato de baunilha");
+        ingredientes1.add("1 xícara e 1/2 de farinha de trigo");
+        ingredientes1.add("1/4 xícara de cacau em pó");
+        ingredientes1.add("1/2 colher de chá de bicarbonato de sódio");
+        ingredientes1.add("1 colher de chá de fermento");
+        ingredientes1.add("1 pitada de sal");
+
+        ArrayList<String> preparo1 = new ArrayList<String>();
+        preparo1.add("1. Misturar ovos, leite, óleo e baunilha.");
+        preparo1.add("2. Adicionar o açúcar.");
+        preparo1.add("3. Misturar todos os ingredientes secos restantes e adicionar à mistura anterior.");
+        preparo1.add("4. Assar à 180 graus Celsius.");
+
+        Receita bolo_chocolate_receita = new Receita("Bolo de chocolate", ingredientes1, preparo1);
+        receitas.add(bolo_chocolate_receita);
+
+        // Feijão tropeiro
+        ArrayList<String> ingredientes2 = new ArrayList<String>();
+        ingredientes2.add("1. 250 gramas de feijão carioquinha.");
+        ingredientes2.add("2. 1 maço de couve.");
+        ingredientes2.add("3. 300 gramas de linguiça de porco.");
+        ingredientes2.add("4. 150 gramas de bacon.");
+        ingredientes2.add("5. 3 ovos.");
+        ingredientes2.add("6. 5 dentes de alho.");
+        ingredientes2.add("7. 1 cebola.");
+        ingredientes2.add("8. Temperos à gosto.");
+
+        ArrayList<String> preparo2 = new ArrayList<String>();
+        preparo2.add("1. Misturar tudo.");
+
+        Receita feijao_tropeiro_receita = new Receita("Feijão tropeiro", ingredientes2, preparo2);
+        receitas.add(feijao_tropeiro_receita);
+
+        // Bolinho de arroz
+        ArrayList<String> ingredientes3 = new ArrayList<String>();
+        ingredientes3.add("Arroz");
+        ArrayList<String> preparo3 = new ArrayList<String>();
+        preparo3.add("1. Cozinhar");
+
+        Receita bolinho_arroz_receita = new Receita("Bolinhos de arroz", ingredientes3, preparo3);
+        receitas.add(bolinho_arroz_receita);
+
+        //Mousse de maracujá
+
+        ArrayList<String> ingredientes4 = new ArrayList<String>();
+        ingredientes4.add("Maracujá");
+        ArrayList<String> preparo4 = new ArrayList<String>();
+        preparo4.add("1. Cozinhar");
+
+        Receita mousse_maracuja_receita = new Receita("Mousse de maracujá", ingredientes4, preparo4);
+        receitas.add(mousse_maracuja_receita);
+
+        // Massa carbonara
+        ArrayList<String> ingredientes5 = new ArrayList<String>();
+        ingredientes5.add("Massa");
+        ingredientes5.add("Bacon");
+        ArrayList<String> preparo5 = new ArrayList<String>();
+        preparo5.add("1. Cozinhar");
+
+        Receita massa_carbonara_receita = new Receita("Massa à carbonara", ingredientes5, preparo5);
+        receitas.add(massa_carbonara_receita);
+
+        //Filé ao molho madeira
+        ArrayList<String> ingredientes6 = new ArrayList<String>();
+        ingredientes6.add("Filé");
+        ingredientes6.add("Vinho");
+        ArrayList<String> preparo6 = new ArrayList<String>();
+        preparo6.add("1. Cozinhar");
+
+        Receita file_madeira_receita = new Receita("Filé ao molho madeira", ingredientes6, preparo6);
+        receitas.add(file_madeira_receita);
+
+        // Pizza caseira
+        ArrayList<String> ingredientes7 = new ArrayList<String>();
+        ingredientes7.add("Farinha");
+        ingredientes7.add("Ovos");
+        ArrayList<String> preparo7 = new ArrayList<String>();
+        preparo7.add("1. Cozinhar");
+
+        Receita pizza_receita = new Receita("Pizza caseira", ingredientes7, preparo7);
+        receitas.add(pizza_receita);
+
+        // Brigadeiro
+        ArrayList<String> ingredientes8 = new ArrayList<String>();
+        ingredientes8.add("1 lata de leite condensado");
+        ingredientes8.add("2 colheres de sopa de cacau em pó");
+        ingredientes8.add("1 colher de sopa de manteira");
+        ArrayList<String> preparo8 = new ArrayList<String>();
+        preparo8.add("1. Juntar todos os ingredientes e cozinhar em fogo médio até que desgrude da panela.");
+
+        Receita brigadeiro_receita = new Receita("Brigadeiro", ingredientes8, preparo8);
+        receitas.add(brigadeiro_receita);
+    }
+
+    private String[] criaArrayNomeReceitas(){
+
+        String[] nomes = new String[receitas.size()];
+        int i = 0;
+
+        for (Receita r : receitas){
+            nomes[i] = r.getNome();
+            i++;
+        }
+
+        return nomes;
     }
 }

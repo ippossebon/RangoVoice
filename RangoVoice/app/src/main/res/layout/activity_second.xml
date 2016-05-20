@@ -1,28 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
     android:background="@color/seashell"
-    tools:context="isadora.rangovoice.SecondActivity">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/seashell"
-        android:orientation="vertical" >
+    tools:context="isadora.rangovoice.ExibirReceitaActivity">
 
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="404dp"
-            android:layout_marginBottom="10dp"
-            tools:listitem="@layout/list_view_item">
-        </ListView>
-    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:background="@color/seashell"></LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Ingredientes"
+        android:textColor="@color/tomato"
+        android:background="@color/seashell"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:id="@+id/textViewIngredientes"
+        android:layout_weight="0.06" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="199dp"
+        android:layout="@layout/listview_ingredientes"
+        android:id="@+id/listViewIngredientesActivity"
+        tools:listitem="@layout/listview_item"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/textViewModoPreparo"
+        android:text="Modo de preparo"
+        android:textColor="@color/tomato"
+        android:background="@color/seashell"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <ListView
+        android:layout_width="365dp"
+        android:layout_height="192dp"
+        android:layout="@layout/listview_modo_preparo"
+        android:id="@+id/listViewModoPreparoActivity"
+        android:layout_weight="1.15"
+        tools:listitem="@layout/listview_item"/>
+
 </LinearLayout>

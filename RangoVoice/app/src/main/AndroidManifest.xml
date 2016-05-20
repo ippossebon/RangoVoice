@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecondActivity"
+            android:name=".ExibirReceitaActivity"
             android:label="@string/title_activity_second"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
