@@ -43,7 +43,7 @@ public class ExibirReceitaActivity extends AppCompatActivity {
             @Override
             public void onInit(int status) {
 
-                text_to_speech_object.setLanguage(new Locale("pt_BR"));
+                text_to_speech_object.setLanguage(new Locale("pt", "br"));
                 text_to_speech_object.speak("Ingredientes", TextToSpeech.QUEUE_ADD, null);
 
                 for (String ingrediente : receita_atual.getIngredientes()){
