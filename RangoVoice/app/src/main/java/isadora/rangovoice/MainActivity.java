@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Get ListView object from xml
-        list_view = (ListView) findViewById(R.id.list); // list é o nome do arquivo xml que define <ListView>
+        list_view = (ListView) findViewById(R.id.lista_nomes_receitas); // list é o nome do arquivo xml que define <ListView>
 
         receitas = new ArrayList<Receita>();
         criaReceitas();
