@@ -52,4 +52,10 @@
         android:layout_weight="1.15"
         tools:listitem="@layout/listview_item"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aperte para falar"
+        android:id="@+id/buttonVoice" />
+
 </LinearLayout>

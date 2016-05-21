@@ -134,27 +134,27 @@ public class MainActivity extends AppCompatActivity {
         ingredientes1.add("1 pitada de sal");
 
         ArrayList<String> preparo1 = new ArrayList<String>();
-        preparo1.add("1. Misturar ovos, leite, óleo e baunilha.");
-        preparo1.add("2. Adicionar o açúcar.");
-        preparo1.add("3. Misturar todos os ingredientes secos restantes e adicionar à mistura anterior.");
-        preparo1.add("4. Assar à 180 graus Celsius.");
+        preparo1.add("Misturar ovos, leite, óleo e baunilha.");
+        preparo1.add("Adicionar o açúcar.");
+        preparo1.add("Misturar todos os ingredientes secos restantes e adicionar à mistura anterior.");
+        preparo1.add("Assar à 180 graus Celsius.");
 
         Receita bolo_chocolate_receita = new Receita("Bolo de chocolate", ingredientes1, preparo1);
         receitas.add(bolo_chocolate_receita);
 
         // Feijão tropeiro
         ArrayList<String> ingredientes2 = new ArrayList<String>();
-        ingredientes2.add("1. 250 gramas de feijão carioquinha.");
-        ingredientes2.add("2. 1 maço de couve.");
-        ingredientes2.add("3. 300 gramas de linguiça de porco.");
-        ingredientes2.add("4. 150 gramas de bacon.");
-        ingredientes2.add("5. 3 ovos.");
-        ingredientes2.add("6. 5 dentes de alho.");
-        ingredientes2.add("7. 1 cebola.");
-        ingredientes2.add("8. Temperos à gosto.");
+        ingredientes2.add("250 gramas de feijão carioquinha.");
+        ingredientes2.add("1 maço de couve.");
+        ingredientes2.add("300 gramas de linguiça de porco.");
+        ingredientes2.add("150 gramas de bacon.");
+        ingredientes2.add("3 ovos.");
+        ingredientes2.add("5 dentes de alho.");
+        ingredientes2.add("1 cebola.");
+        ingredientes2.add("Temperos à gosto.");
 
         ArrayList<String> preparo2 = new ArrayList<String>();
-        preparo2.add("1. Misturar tudo.");
+        preparo2.add("Misturar tudo.");
 
         Receita feijao_tropeiro_receita = new Receita("Feijão tropeiro", ingredientes2, preparo2);
         receitas.add(feijao_tropeiro_receita);
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> ingredientes3 = new ArrayList<String>();
         ingredientes3.add("Arroz");
         ArrayList<String> preparo3 = new ArrayList<String>();
-        preparo3.add("1. Cozinhar");
+        preparo3.add("Cozinhar");
 
         Receita bolinho_arroz_receita = new Receita("Bolinhos de arroz", ingredientes3, preparo3);
         receitas.add(bolinho_arroz_receita);
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> ingredientes4 = new ArrayList<String>();
         ingredientes4.add("Maracujá");
         ArrayList<String> preparo4 = new ArrayList<String>();
-        preparo4.add("1. Cozinhar");
+        preparo4.add("Cozinhar");
 
         Receita mousse_maracuja_receita = new Receita("Mousse de maracujá", ingredientes4, preparo4);
         receitas.add(mousse_maracuja_receita);
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         ingredientes5.add("Massa");
         ingredientes5.add("Bacon");
         ArrayList<String> preparo5 = new ArrayList<String>();
-        preparo5.add("1. Cozinhar");
+        preparo5.add("Cozinhar");
 
         Receita massa_carbonara_receita = new Receita("Massa à carbonara", ingredientes5, preparo5);
         receitas.add(massa_carbonara_receita);
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         ingredientes6.add("Filé");
         ingredientes6.add("Vinho");
         ArrayList<String> preparo6 = new ArrayList<String>();
-        preparo6.add("1. Cozinhar");
+        preparo6.add("Cozinhar");
 
         Receita file_madeira_receita = new Receita("Filé ao molho madeira", ingredientes6, preparo6);
         receitas.add(file_madeira_receita);
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         ingredientes7.add("Farinha");
         ingredientes7.add("Ovos");
         ArrayList<String> preparo7 = new ArrayList<String>();
-        preparo7.add("1. Cozinhar");
+        preparo7.add("Cozinhar");
 
         Receita pizza_receita = new Receita("Pizza caseira", ingredientes7, preparo7);
         receitas.add(pizza_receita);
@@ -212,9 +212,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> ingredientes8 = new ArrayList<String>();
         ingredientes8.add("1 lata de leite condensado");
         ingredientes8.add("2 colheres de sopa de cacau em pó");
-        ingredientes8.add("1 colher de sopa de manteira");
+        ingredientes8.add("1 colher de sopa de manteiga");
         ArrayList<String> preparo8 = new ArrayList<String>();
-        preparo8.add("1. Juntar todos os ingredientes e cozinhar em fogo médio até que desgrude da panela.");
+        preparo8.add("Juntar todos os ingredientes e cozinhar em fogo médio até que desgrude da panela.");
 
         Receita brigadeiro_receita = new Receita("Brigadeiro", ingredientes8, preparo8);
         receitas.add(brigadeiro_receita);
