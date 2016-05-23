@@ -1,39 +1,34 @@
 package isadora.rangovoice;
 
-import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
+
 import edu.cmu.pocketsphinx.Assets;
 import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
-
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class ExibirReceitaActivity extends AppCompatActivity implements RecognitionListener {
 
@@ -71,8 +66,11 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        list_view_ingredientes = (ListView) findViewById(R.id.listViewIngredientesActivity); // list é o nome do arquivo xml que define <ListView>
+
+        /* Define onde as informações serão mostradas. */
+        list_view_ingredientes = (ListView) findViewById(R.id.listViewIngredientesActivity);
         list_view_modo_preparo = (ListView) findViewById(R.id.listViewModoPreparoActivity);
+
         btnVoice = (Button) findViewById(R.id.buttonVoice);
 
         btnVoice.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +80,7 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
             }
         });
 
-        //Resgatar o id passado por parâmetro do item selecionado
+        /* Resgatar o id passado por parâmetro do item selecionado */
         Bundle b = getIntent().getExtras();
         int value = 1; // or other values
 
@@ -90,6 +88,8 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
             value = b.getInt("id");
 
         }
+
+
         runRecognizerSetup();
         receita = MainActivity.receitas.get(value);
 
@@ -127,7 +127,8 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        // Deve pegar SEMPRE português.
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, new Locale("pt", "br");
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Diga os comandos para ouvir a receita.");
         intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, new Long(10000));
         intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, new Long(10000));
@@ -152,6 +153,7 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String textoInterpretado = result.get(0);
+                    Log.d(TAG, "Entendeu: " + textoInterpretado);
                     if (textoInterpretado.equals("repetir")) {
                         comandoRepetir();
                     } else if (textoInterpretado.equals("próximo")) {
@@ -199,14 +201,14 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
                 indexIngredientes--;
                 falar("Ingrediente " + (indexIngredientes + 1) + ", " + receita.getIngredientes().get(indexIngredientes));
             } else {
-                falar("Não existem ingredientes antes desse.");
+                falar("Não existem ingredientes antes deste.");
             }
         } else {
             if (indexPreparo > 0) {
                 indexPreparo--;
                 falar("Passo " + (indexPreparo + 1) + ", " + receita.getModoPreparo().get(indexPreparo));
             } else {
-                falar("Não existem passos de preparo antes desse.");
+                falar("Não existem passos de preparo antes deste.");
             }
         }
     }
