@@ -26,14 +26,4 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvMsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:textColor="@color/tomato"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
 </RelativeLayout>

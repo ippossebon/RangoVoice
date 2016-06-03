@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         // Assign adapter to ListView
         list_view.setAdapter(adapter);
 
+
+
         // ListView Item Click Listener - Determina o que acontece quando um item da lista de receitas é selecionado.
         list_view.setOnItemClickListener(new OnItemClickListener() {
 
