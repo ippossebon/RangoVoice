@@ -77,8 +77,8 @@
         android:layout_weight="0.53">
 
         <Button
-            android:layout_width="62dp"
-            android:layout_height="match_parent"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
             android:id="@+id/buttonVoice"
             android:background="@mipmap/ic_microphone"
             android:layout_marginLeft="300dp"

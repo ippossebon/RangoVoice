@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -352,9 +353,18 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
             @Override
             protected void onPostExecute(Exception result) {
                 if (result != null) {
-                    btnVoice.setText("Falha ao reconhecer " + result);
+                    //btnVoice.setText("Falha ao reconhecer " + result);
+                    AlertDialog.Builder dlgAlert;
+                    dlgAlert = new AlertDialog.Builder(ExibirReceitaActivity.this);
+                    dlgAlert.setMessage("Falha ao reconhecer \"" + "\"" );
+                    dlgAlert.setTitle("Falha no reconhecimento");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+
                 } else {
-                    btnVoice.setText("Aperte ou diga \"Ok chef Michael\" para começar.");
+                    //btnVoice.setText("Aperte ou diga \"Ok chef Michael\" para começar.");
+
                     aguardarKeyword();
                 }
             }
