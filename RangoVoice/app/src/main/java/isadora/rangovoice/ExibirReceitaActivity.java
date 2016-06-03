@@ -113,8 +113,8 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void falar(String oque) {
-        text_to_speech_object.speak(oque, TextToSpeech.QUEUE_ADD, null);
+    private void falar(String texto) {
+        text_to_speech_object.speak(texto, TextToSpeech.QUEUE_ADD, null);
     }
 
 
@@ -128,7 +128,7 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         // Deve pegar SEMPRE português.
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, new Locale("pt", "br");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, new Locale("pt", "br"));
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Diga os comandos para ouvir a receita.");
         intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, new Long(10000));
         intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, new Long(10000));

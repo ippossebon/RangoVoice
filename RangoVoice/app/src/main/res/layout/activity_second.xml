@@ -6,56 +6,84 @@
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
     android:background="@color/seashell"
-    tools:context="isadora.rangovoice.ExibirReceitaActivity">
+    tools:context="isadora.rangovoice.ExibirReceitaActivity"
+    android:weightSum="1">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="171dp"
-        android:layout_height="wrap_content"
-        android:background="@color/seashell"></LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Ingredientes"
-        android:textColor="@color/tomato"
-        android:background="@color/seashell"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:id="@+id/textViewIngredientes"
-        android:layout_weight="0.06" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="199dp"
-        android:layout="@layout/listview_ingredientes"
-        android:id="@+id/listViewIngredientesActivity"
-        tools:listitem="@layout/listview_item"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/textViewModoPreparo"
-        android:text="Modo de preparo"
-        android:textColor="@color/tomato"
-        android:background="@color/seashell"
-        android:textSize="25sp"
-        android:textStyle="bold"/>
-
-    <ListView
-        android:layout_width="365dp"
-        android:layout_height="192dp"
-        android:layout="@layout/listview_modo_preparo"
-        android:id="@+id/listViewModoPreparoActivity"
-        android:layout_weight="1.15"
-        tools:listitem="@layout/listview_item"/>
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aguardando o Michael..."
-        android:id="@+id/buttonVoice" />
+        android:background="@color/seashell">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Ingredientes"
+            android:textColor="@color/tomato"
+            android:background="@color/seashell"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:id="@+id/textViewIngredientes"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp" />
+
+        <ListView
+            android:layout_width="370dp"
+            android:layout_height="164dp"
+            android:layout="@layout/listview_ingredientes"
+            android:id="@+id/listViewIngredientesActivity"
+            tools:listitem="@layout/listview_item"
+            android:layout_margin="10dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="370dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Modo de preparo"
+                android:textColor="@color/tomato"
+                android:background="@color/seashell"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:id="@+id/textView2"
+                android:layout_margin="10dp" />
+
+            <ListView
+                android:layout_width="370dp"
+                android:layout_height="192dp"
+                android:layout="@layout/listview_modo_preparo"
+                android:id="@+id/listViewModoPreparoActivity"
+                android:layout_weight="0.07"
+                tools:listitem="@layout/listview_item"
+                android:layout_margin="10dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.53">
+
+        <Button
+            android:layout_width="62dp"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonVoice"
+            android:background="@mipmap/ic_microphone"
+            android:layout_marginLeft="300dp"
+            android:layout_marginRight="10dp"
+            android:allowUndo="false" />
+    </LinearLayout>
 
 </LinearLayout>
