@@ -1,8 +1,6 @@
 package isadora.rangovoice;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.content.ActivityNotFoundException;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -10,17 +8,12 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog;
-import static android.widget.Toast.makeText;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -36,6 +29,8 @@ import edu.cmu.pocketsphinx.Hypothesis;
 import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
+
+import static android.widget.Toast.makeText;
 
 public class ExibirReceitaActivity extends AppCompatActivity implements RecognitionListener {
 
@@ -117,7 +112,7 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
         text_to_speech_object = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                text_to_speech_object.setLanguage(new Locale("pt", "br"));
+                text_to_speech_object.setLanguage(new Locale("pt", "BR"));
                 text_to_speech_object.setPitch(0.7f); //0.5 = traveco. 0.3 = fumante (voz da Erodi), 0.7 = mulher madura
                 falar("Receita para " + receita.getNome());
             }
@@ -168,17 +163,22 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
                 ArrayList<String> matches = results.getStringArrayList(android.speech.SpeechRecognizer.RESULTS_RECOGNITION);
                 String textoInterpretado = matches.get(0);
                 makeText(getApplicationContext(), "Comando: " + textoInterpretado, Toast.LENGTH_SHORT).show();
+
+                Log.w(TAG,"App entende: " + textoInterpretado);
+
                 if (textoInterpretado.equals("repetir")) {
                     comandoRepetir();
-                } else if (textoInterpretado.equals("próximo")) {
+                } else if (textoInterpretado.equals("próximo") || textoInterpretado.equals("ok") || textoInterpretado.equals("e agora") ||
+                        textoInterpretado.equals("depois")) {
                     comandoProximo();
-                } else if (textoInterpretado.equals("voltar")) {
+                } else if (textoInterpretado.equals("voltar") || textoInterpretado.equals("volta") || textoInterpretado.equals("antes")) {
                     comandoVoltar();
                 } else if (textoInterpretado.equals("ingredientes")) {
                     comandoIngredientes();
-                } else if (textoInterpretado.equals("modo de preparo")) {
+                } else if (textoInterpretado.equals("modo de preparo") || textoInterpretado.equals("preparo") || textoInterpretado.equals("e agora?")) {
                     comandoPreparo();
-                } else {
+                }
+                else {
                     falar("não entendi o que você disse!");
                 }
                 aguardarKeyword();
@@ -197,7 +197,7 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
         });
 
         recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, new Locale("pt", "BR")); // Locale.getDefault()
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, this.getPackageName());
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
