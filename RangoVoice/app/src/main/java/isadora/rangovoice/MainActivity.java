@@ -177,16 +177,25 @@ public class MainActivity extends AppCompatActivity {
         ingredientes2.add("Temperos à gosto.");
 
         ArrayList<String> preparo2 = new ArrayList<String>();
-        preparo2.add("Misturar tudo.");
+        preparo2.add("Fritar bacon, linguiça, couve, alho e cebola.");
+        preparo2.add("Adicionar farinha.");
+        preparo2.add("Adicionar adicionar o feijão já cozido.");
 
         Receita feijao_tropeiro_receita = new Receita("Feijão tropeiro", ingredientes2, preparo2);
         receitas.add(feijao_tropeiro_receita);
 
         // Bolinho de arroz
         ArrayList<String> ingredientes3 = new ArrayList<String>();
-        ingredientes3.add("Arroz");
+        ingredientes3.add("2 xícaras de arroz cozido.");
+        ingredientes3.add("1 ovo.");
+        ingredientes3.add("1/2 xícara de leite.");
+        ingredientes3.add("2 colheres de sopa de queijo ralado.");
+        ingredientes3.add("2 xícaras de arroz cozido.");
+        ingredientes3.add("Farinha de trigo até dar o ponto.");
+        ingredientes3.add("Cebola, sal e cebolinha à gosto.");
         ArrayList<String> preparo3 = new ArrayList<String>();
-        preparo3.add("Cozinhar");
+        preparo3.add("Em uma tigela, misture todos os ingredientes.");
+        preparo3.add("Frite as colheradas em óleo quente.");
 
         Receita bolinho_arroz_receita = new Receita("Bolinhos de arroz", ingredientes3, preparo3);
         receitas.add(bolinho_arroz_receita);
@@ -194,39 +203,74 @@ public class MainActivity extends AppCompatActivity {
         //Mousse de maracujá
 
         ArrayList<String> ingredientes4 = new ArrayList<String>();
-        ingredientes4.add("Maracujá");
+        ingredientes4.add("1 lata de leite condensado.");
+        ingredientes4.add("1 lata de creme de leite sem soro.");
+        ingredientes4.add("1 lata de suco de maracujá.");
         ArrayList<String> preparo4 = new ArrayList<String>();
-        preparo4.add("Cozinhar");
+        preparo4.add("Bater tudo no liquidificador e servir gelado");
 
         Receita mousse_maracuja_receita = new Receita("Mousse de maracujá", ingredientes4, preparo4);
         receitas.add(mousse_maracuja_receita);
 
         // Massa carbonara
         ArrayList<String> ingredientes5 = new ArrayList<String>();
-        ingredientes5.add("Massa");
-        ingredientes5.add("Bacon");
+        ingredientes5.add("500g de massa espaguete.");
+        ingredientes5.add("200g de bacon em cubos");
+        ingredientes5.add("1 cebola piacada.");
+        ingredientes5.add("1 dente de alho picado.");
+        ingredientes5.add("1 copo de leite desnatado.");
+        ingredientes5.add("1 caixa de creme de leite.");
+        ingredientes5.add("Salsinha picada.");
+        ingredientes5.add("Queijo parmesão.");
+        ingredientes5.add("Manjericão.");
+        ingredientes5.add("Sal à gosto.");
         ArrayList<String> preparo5 = new ArrayList<String>();
-        preparo5.add("Cozinhar");
+        preparo5.add("Cozinhar a massa com sal e óleo.");
+        preparo5.add("Em outra panela, fritar o bacon e ir adicionando a cebola, salsinha e alho.");
+        preparo5.add("Adicionar o leite e esperar ferver por cerca de 2 minutos.");
+        preparo5.add("Adicionar o creme de leite.");
+        preparo5.add("Adicionar o manjericão.");
+        preparo5.add("Adicionar a massa e misturar tudo.");
 
         Receita massa_carbonara_receita = new Receita("Massa à carbonara", ingredientes5, preparo5);
         receitas.add(massa_carbonara_receita);
 
         //Filé ao molho madeira
         ArrayList<String> ingredientes6 = new ArrayList<String>();
-        ingredientes6.add("Filé");
-        ingredientes6.add("Vinho");
+        ingredientes6.add("1/2 kg de filé mignon em cubos");
+        ingredientes6.add("3 colheres de sopa de azeite");
+        ingredientes6.add("1 cebola");
+        ingredientes6.add("2 dentes de alho");
+        ingredientes6.add("1 tablete de caldo de carne");
+        ingredientes6.add("Sal e pimenta calabresa à gosto");
+        ingredientes6.add("1 copo de vinho branco");
+        ingredientes6.add("1 vidro de molho madeira");
+        ingredientes6.add("1 vidro de cogumelos");
         ArrayList<String> preparo6 = new ArrayList<String>();
-        preparo6.add("Cozinhar");
+        preparo6.add("Dourar a carne com a cebola e o alho, no azeite.");
+        preparo6.add("Acrescentar os demais ingredientes.");
+        preparo6.add("Deixar cozinhar por 5 minutos e servir em seguida.");
 
         Receita file_madeira_receita = new Receita("Filé ao molho madeira", ingredientes6, preparo6);
         receitas.add(file_madeira_receita);
 
         // Pizza caseira
         ArrayList<String> ingredientes7 = new ArrayList<String>();
-        ingredientes7.add("Farinha");
-        ingredientes7.add("Ovos");
+        ingredientes7.add("1 xícara de chá de leite");
+        ingredientes7.add("1 ovo");
+        ingredientes7.add("1 colher de chá de sal");
+        ingredientes7.add("1 colher de chá de açúcar");
+        ingredientes7.add("1 colher de sopa de margarina");
+        ingredientes7.add("1 xícara e 1/2 de farinha");
+        ingredientes7.add("1 colher de sobremesa de fermento");
+        ingredientes7.add("1/2 lata de molho de tomate");
         ArrayList<String> preparo7 = new ArrayList<String>();
-        preparo7.add("Cozinhar");
+        preparo7.add("No liquidificador bata o leite, o ovo, o sal, o açúcar, a margarina, " +
+                "a farinha de trigo e o fermento em pó até que tudo esteja encorporado");
+        preparo7.add("Despeje a massa em uma assadeira para pizza untada com margarina e leve ao forno preaquecido por 20 minutos");
+        preparo7.add("Retire do forno e despeje o molho de tomate");
+        preparo7.add("Cubra a massa com mussarela ralada, tomate e orégano a gosto");
+        preparo7.add("Leve novamente ao forno até derreter a mussarela");
 
         Receita pizza_receita = new Receita("Pizza caseira", ingredientes7, preparo7);
         receitas.add(pizza_receita);
@@ -234,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
         // Brigadeiro
         ArrayList<String> ingredientes8 = new ArrayList<String>();
         ingredientes8.add("1 lata de leite condensado");
-        ingredientes8.add("2 colheres de sopa de cacau em pó");
+        ingredientes8.add("4 colheres de sopa de cacau em pó");
         ingredientes8.add("1 colher de sopa de manteiga");
         ArrayList<String> preparo8 = new ArrayList<String>();
         preparo8.add("Juntar todos os ingredientes e cozinhar em fogo médio até que desgrude da panela.");
