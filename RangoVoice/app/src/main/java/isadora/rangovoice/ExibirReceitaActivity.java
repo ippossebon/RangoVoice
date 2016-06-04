@@ -175,7 +175,7 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
                     comandoVoltar();
                 } else if (textoInterpretado.equals("ingredientes")) {
                     comandoIngredientes();
-                } else if (textoInterpretado.equals("modo de preparo") || textoInterpretado.equals("preparo") || textoInterpretado.equals("e agora?")) {
+                } else if (textoInterpretado.equals("modo de preparo") || textoInterpretado.equals("preparo") || textoInterpretado.equals("como faz")) {
                     comandoPreparo();
                 }
                 else {
