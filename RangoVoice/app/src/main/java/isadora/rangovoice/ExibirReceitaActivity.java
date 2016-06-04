@@ -196,6 +196,8 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
         }
     }
 
+
+
     private void comandoVoltar() {
         if (ondeEstou == INGREDIENTES) {
             if (indexIngredientes > 0) {

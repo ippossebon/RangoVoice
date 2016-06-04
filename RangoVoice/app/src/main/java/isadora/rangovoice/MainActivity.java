@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.android.gms.appindexing.Action;
@@ -41,12 +40,34 @@ public class MainActivity extends AppCompatActivity {
         receitas = new ArrayList<Receita>();
         criaReceitas();
         String[] nomes_receitas = criaArrayNomeReceitas();
+        Integer[] images_id={
+                R.drawable.bolo_de_chocolate,
+                R.drawable.feijao_tropeiro,
+                R.drawable.bolinho_arroz,
+                R.drawable.mousse_maracuja,
+                R.drawable.carbonara,
+                R.drawable.file_madeira,
+                R.drawable.pizza,
+                R.drawable.brigdeiro,
+        };
+        String[] descricoes = {
+                "Bolos",
+                "Salgados",
+                "Aperitivos",
+                "Sobremesas",
+                "Salgados",
+                "Salgados",
+                "Salgados",
+                "Sobremesas"
+        };
 
         /* Adaptors fornecem o conteúdo a interface.
          Primeiro parâmetro: contexto, Segundo: layout da linha, terceiro: ID do textview em que será escrito, quarto: array de conteudo*/
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.activity_list_item, android.R.id.text1, nomes_receitas);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+               // android.R.layout.activity_list_item, android.R.id.text1, nomes_receitas);
 
+        /* Aplica layout de imagem + texto para cada item. */
+        CustomListAdapter adapter = new CustomListAdapter(this, nomes_receitas, images_id, descricoes);
 
         // Assign adapter to ListView
         list_view.setAdapter(adapter);
