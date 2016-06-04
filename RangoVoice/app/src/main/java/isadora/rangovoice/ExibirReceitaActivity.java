@@ -1,5 +1,7 @@
 package isadora.rangovoice;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,13 +10,17 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
+import static android.widget.Toast.makeText;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -40,12 +46,19 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
     private TextToSpeech text_to_speech_object; //Objeto do google para converter texto em voz.
     private SpeechRecognizer recognizer; //Objeto de reconhecimento da lib sphinxpocket.
     private static final String KWS_SEARCH = "wakeup"; //Ainda não sabemos para que serve isso.
-    private static final String KEYPHRASE = "ok chef michael"; //Palavra-chave para ativar microfone.
+    private static final String KEYPHRASE = "ok sophia"; //Palavra-chave para ativar microfone.
 
+    //add
+    private android.speech.SpeechRecognizer googleRecognizer; //Reconhecedor do google.
+    private Intent recognizerIntent; //Intent do recognizer
+    private String LOG_TAG = "RangoLog";
 
     private Button btnVoice;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     private static final int PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+
+    //add
+    private boolean performingSpeechSetup = false; //gambi flag
 
     Receita receita;
 
@@ -105,13 +118,130 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
             @Override
             public void onInit(int status) {
                 text_to_speech_object.setLanguage(new Locale("pt", "br"));
+                text_to_speech_object.setPitch(0.7f); //0.5 = traveco. 0.3 = fumante (voz da Erodi), 0.7 = mulher madura
                 falar("Receita para " + receita.getNome());
             }
         });
 
+        /* Inicializando o objeto Speech to Text */
+        googleRecognizer = android.speech.SpeechRecognizer.createSpeechRecognizer(this);
+        googleRecognizer.setRecognitionListener(new android.speech.RecognitionListener() {
+
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+                performingSpeechSetup = false; //gambi hack
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+                Log.i(LOG_TAG, "onBeginningOfSpeech");
+                makeText(getApplicationContext(), "Escutando...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+                makeText(getApplicationContext(), "Identificando...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(int error) {
+                if (performingSpeechSetup && error == android.speech.SpeechRecognizer.ERROR_NO_MATCH) return; //gambi solving pattern
+                if (android.speech.SpeechRecognizer.ERROR_NO_MATCH == error) {
+                    falar("Repete pra mim.");
+                }
+                makeText(getApplicationContext(), "Erro:" + getErrorText(error), Toast.LENGTH_SHORT).show();
+                aguardarKeyword();
+            }
+
+            @Override
+            public void onResults(Bundle results) {
+                ArrayList<String> matches = results.getStringArrayList(android.speech.SpeechRecognizer.RESULTS_RECOGNITION);
+                String textoInterpretado = matches.get(0);
+                makeText(getApplicationContext(), "Comando: " + textoInterpretado, Toast.LENGTH_SHORT).show();
+                if (textoInterpretado.equals("repetir")) {
+                    comandoRepetir();
+                } else if (textoInterpretado.equals("próximo")) {
+                    comandoProximo();
+                } else if (textoInterpretado.equals("voltar")) {
+                    comandoVoltar();
+                } else if (textoInterpretado.equals("ingredientes")) {
+                    comandoIngredientes();
+                } else if (textoInterpretado.equals("modo de preparo")) {
+                    comandoPreparo();
+                } else {
+                    falar("não entendi o que você disse!");
+                }
+                aguardarKeyword();
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+
+            }
+
+            @Override
+            public void onEvent(int eventType, Bundle params) {
+
+            }
+        });
+
+        recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, this.getPackageName());
+        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    public static String getErrorText(int errorCode) {
+        String message;
+        switch (errorCode) {
+            case android.speech.SpeechRecognizer.ERROR_AUDIO:
+                message = "Erro de gravação";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_CLIENT:
+                message = "Client side error";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                message = "Insufficient permissions";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_NETWORK:
+                message = "Erro na rede";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                message = "Erro de timeout";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_NO_MATCH:
+                message = "Comando não identificado";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                message = "Serviço de reconhecimento já está sendo usado";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_SERVER:
+                message = "Erro do server";
+                break;
+            case android.speech.SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                message = "Sem palavras para identificar";
+                break;
+            default:
+                message = "Tente novamente.";
+                break;
+        }
+        return message;
     }
 
     private void falar(String texto) {
@@ -123,59 +253,10 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
      * Mostra a janela que capta a voz
      */
     private void captarVoz() {
-        
         recognizer.cancel();
-
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        // Deve pegar SEMPRE português.
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, new Locale("pt", "br"));
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Diga os comandos para ouvir a receita.");
-        intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, new Long(10000));
-        intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, new Long(10000));
-        intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, new Long(10000));
-
-        try {
-            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
-        } catch (ActivityNotFoundException a) {
-            Toast.makeText(getApplicationContext(), "Bagulho nao suportado", Toast.LENGTH_SHORT).show();
-        }
+        performingSpeechSetup = true;
+        googleRecognizer.startListening(recognizerIntent);
     }
-
-    /**
-     * Receiving speech input
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case REQ_CODE_SPEECH_INPUT: {
-                if (resultCode == RESULT_OK && null != data) {
-                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    String textoInterpretado = result.get(0);
-                    Log.d(TAG, "Entendeu: " + textoInterpretado);
-                    if (textoInterpretado.equals("repetir")) {
-                        comandoRepetir();
-                    } else if (textoInterpretado.equals("próximo")) {
-                        comandoProximo();
-                    } else if (textoInterpretado.equals("voltar")) {
-                        comandoVoltar();
-                    } else if (textoInterpretado.equals("ingredientes")) {
-                        comandoIngredientes();
-                    } else if (textoInterpretado.equals("modo de preparo")) {
-                        comandoPreparo();
-                    } else {
-                        falar("não entendi o que você disse!");
-                    }
-                    aguardarKeyword();
-                }
-                break;
-            }
-
-        }
-    }
-
 
     private void comandoProximo() {
         if (ondeEstou == INGREDIENTES) {
@@ -195,8 +276,6 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
             }
         }
     }
-
-
 
     private void comandoVoltar() {
         if (ondeEstou == INGREDIENTES) {
@@ -317,7 +396,6 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
 
         String text = hypothesis.getHypstr();
         if (text.equals(KEYPHRASE)) {
-            recognizer.stop();
             captarVoz();
         }
     }
