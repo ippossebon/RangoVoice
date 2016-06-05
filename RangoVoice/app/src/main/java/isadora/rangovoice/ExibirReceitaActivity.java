@@ -166,7 +166,7 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
 
                 Log.w(TAG,"App entende: " + textoInterpretado);
 
-                if (textoInterpretado.equals("repetir")) {
+                if (textoInterpretado.equals("repetir")|| textoInterpretado.equals("repete")) {
                     comandoRepetir();
                 } else if (textoInterpretado.equals("próximo") || textoInterpretado.equals("ok") || textoInterpretado.equals("e agora") ||
                         textoInterpretado.equals("depois")) {
@@ -175,7 +175,8 @@ public class ExibirReceitaActivity extends AppCompatActivity implements Recognit
                     comandoVoltar();
                 } else if (textoInterpretado.equals("ingredientes")) {
                     comandoIngredientes();
-                } else if (textoInterpretado.equals("modo de preparo") || textoInterpretado.equals("preparo") || textoInterpretado.equals("como faz")) {
+                } else if (textoInterpretado.equals("modo de preparo") || textoInterpretado.equals("preparo") || textoInterpretado.equals("como faz") ||
+                                                    textoInterpretado.equals("como faço")) {
                     comandoPreparo();
                 }
                 else {
