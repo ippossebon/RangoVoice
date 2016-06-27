@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.file_madeira,
                 R.drawable.pizza,
                 R.drawable.brigdeiro,
+                R.drawable.android,
+                R.drawable.android
         };
         String[] descricoes = {
                 "Bolos",
@@ -58,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 "Salgados",
                 "Salgados",
                 "Salgados",
-                "Sobremesas"
+                "Sobremesas",
+                "Teste mãos limpas",
+                "Teste mãos sujas"
         };
 
         /* Adaptors fornecem o conteúdo a interface.
@@ -285,6 +289,36 @@ public class MainActivity extends AppCompatActivity {
 
         Receita brigadeiro_receita = new Receita("Brigadeiro", ingredientes8, preparo8);
         receitas.add(brigadeiro_receita);
+
+        // Receita teste 1 - mãos livres
+        ArrayList<String> ingredientes_teste1 = new ArrayList<String>();
+        ingredientes_teste1.add("2 lápis de cor vermelhos");
+        ingredientes_teste1.add("3 lápis de cor azuis");
+        ingredientes_teste1.add("4 lápis de cor pretos");
+        ingredientes_teste1.add("1 lápis de cor amarelo");
+        ingredientes_teste1.add("1 lápis de cor rosa");
+        ArrayList<String> preparo_teste1 = new ArrayList<String>();
+        preparo_teste1.add("Juntar lápis vermelhos com os azuis");
+        preparo_teste1.add("Adicionar, aos poucos, o lápis amarelo");
+        preparo_teste1.add("Sem parar de mexer, adicionar os lápis pretos e o lápis rosa");
+
+        Receita teste1 = new Receita("Teste 1", ingredientes_teste1, preparo_teste1);
+        receitas.add(teste1);
+
+        // Receita teste 2 - sem a ponta dos dedos
+        ArrayList<String> ingredientes_teste2 = new ArrayList<String>();
+        ingredientes_teste2.add("3 lápis de cor pretos");
+        ingredientes_teste2.add("1 lápis de cor rosa");
+        ingredientes_teste2.add("2 lápis de cor amarelos");
+        ingredientes_teste2.add("1 lápis de cor vermelho");
+        ingredientes_teste2.add("2 lápis de cor azuis");
+        ArrayList<String> preparo_teste2 = new ArrayList<String>();
+        preparo_teste2.add("Juntar lápis rosa com os lápis amarelos");
+        preparo_teste2.add("Sem parar de mexer, adicionar o lápis vermelho");
+        preparo_teste2.add("Adicionar, aos poucos, os lápis azuis e os lápis pretos");
+
+        Receita teste2 = new Receita("Teste 2", ingredientes_teste2, preparo_teste2);
+        receitas.add(teste2);
     }
 
     private String[] criaArrayNomeReceitas(){
